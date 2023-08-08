@@ -38,6 +38,7 @@ export function withStickyHeader<T extends React.ComponentClass<any>>(component:
       renderTabs,
       scrollEventThrottle = 16,
       style,
+      CellRendererComponent,
       ...rest
     } = props;
     const {
@@ -53,7 +54,8 @@ export function withStickyHeader<T extends React.ComponentClass<any>>(component:
     } = useStickyHeaderProps(props);
 
     const cellRenderer = React.useMemo(
-      () => createCellRenderer(itemLayoutAnimation),
+      () =>
+        CellRendererComponent ? CellRendererComponent : createCellRenderer(itemLayoutAnimation),
       // eslint-disable-next-line react-hooks/exhaustive-deps
       []
     );
